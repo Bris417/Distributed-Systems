@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package LifeUnderWater;
+
+service PositionService {
+  rpc GetPosition(PositionAsk) returns (PositionRet);
+}
+
+message PositionAsk {
+  int64 latitude_e7 = 1;
+  int64 longitude_e7 = 2;
+}
+
+message PositionRet {
+  repeated Coordinate positions = 1;
+}
+
+message Coordinate {
+  int64 latitude_e7 = 1;
+  int64 longitude_e7 = 2;
+}
