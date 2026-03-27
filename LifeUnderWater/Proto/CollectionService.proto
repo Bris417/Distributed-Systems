@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package LifeUnderWater;
+
+service CollectionService {
+
+  rpc RecordCollectionPath(stream RecordPathPoint) returns (CollectionSummary);
+
+  rpc StartTargetedCollection(stream RobotStatus) returns (stream Command);
+}
+
+message RecordPathPoint {
+  int64 latitude_e7 = 1;
+  int64 longitude_e7 = 2;
+}
+
+message CollectionSummary {
+  string result = 1;
+}
+
+message RobotStatus {
+  int32 battery_percentage = 1;
+}
+
+message Command {
+  string action = 1;
+}

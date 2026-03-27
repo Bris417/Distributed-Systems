@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package LifeUnderWater;
+
+service NamingService {
+  rpc RegisterService(ServiceInfo) returns (RegisterResponse);
+  rpc DiscoverService(ServiceRequest) returns (ServiceInfo);
+}
+
+message ServiceInfo {
+  string name = 1;
+  string host = 2;
+  int32 port = 3;
+}
+
+message RegisterResponse {
+  string status = 1;
+}
+
+message ServiceRequest {
+  string name = 1;
+}

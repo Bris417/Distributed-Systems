@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package LifeUnderWater;
+
+service PollutionLevelService {
+  rpc GetPollutionLevel(PollutionLevelAsk) returns (stream PollutionLevelRet);
+}
+
+message PollutionLevelAsk {
+  int32 pollutionLevel = 1;
+}
+
+message PollutionLevelRet {
+  int32 level = 1;
+}
