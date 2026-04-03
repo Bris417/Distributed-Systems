@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package LifeUnderWater;
+
+// PositionService is a simple unary RPC.
+// The client sends one request and gets one response back.
+service PositionService {
+  rpc GetPosition(PositionAsk) returns (PositionRet);
+}
+
+// The request uses E7 values to keep coordinates as integers.
+message PositionAsk {
+  int64 latitude_e7 = 1;
+  int64 longitude_e7 = 2;
+}
+
+// The response can return more than one coordinate.
+message PositionRet {
+  repeated Coordinate positions = 1;
+}
+
+// A coordinate is one latitude and one longitude pair.
+message Coordinate {
+  int64 latitude_e7 = 1;
+  int64 longitude_e7 = 2;
+}

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package LifeUnderWater;
+
+// NamingService works like a very small phone book.
+// Other services can register themselves here, and the client can ask where a service is.
+service NamingService {
+  rpc RegisterService(ServiceInfo) returns (RegisterResponse);
+  rpc DiscoverService(ServiceRequest) returns (ServiceInfo);
+}
+
+// This message stores the basic info needed to reach a service.
+message ServiceInfo {
+  string name = 1;
+  string host = 2;
+  int32 port = 3;
+}
+
+// The register call only needs to tell the client if the save worked.
+message RegisterResponse {
+  string status = 1;
+}
+
+// The client discovers a service by sending only the service name.
+message ServiceRequest {
+  string name = 1;
+}

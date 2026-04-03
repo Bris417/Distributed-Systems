@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package LifeUnderWater;
+
+// PollutionLevelService uses server streaming.
+// One client request can produce many pollution level messages.
+service PollutionLevelService {
+  rpc GetPollutionLevel(PollutionLevelAsk) returns (stream PollutionLevelRet);
+}
+
+// The client sends a base value that the server can build on.
+message PollutionLevelAsk {
+  int32 pollutionLevel = 1;
+}
+
+// Each streamed message contains one pollution level result.
+message PollutionLevelRet {
+  int32 level = 1;
+}

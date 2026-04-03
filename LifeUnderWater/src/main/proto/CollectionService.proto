@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package LifeUnderWater;
+
+// CollectionService shows the two streaming styles used in this project.
+service CollectionService {
+
+  // Client streaming:
+  // the client sends many path points, then the server returns one summary.
+  rpc RecordCollectionPath(stream RecordPathPoint) returns (CollectionSummary);
+
+  // Bidirectional streaming:
+  // the client sends robot status values, and the server answers with commands.
+  rpc StartTargetedCollection(stream RobotStatus) returns (stream Command);
+}
+
+// One point from the robot path.
+message RecordPathPoint {
+  int64 latitude_e7 = 1;
+  int64 longitude_e7 = 2;
+}
+
+// Final result after the server receives all path points.
+message CollectionSummary {
+  string result = 1;
+}
+
+// A simple robot status message for the battery level.
+message RobotStatus {
+  int32 battery_percentage = 1;
+}
+
+// The server replies with a simple action command.
+message Command {
+  string action = 1;
+}
